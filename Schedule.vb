@@ -1196,7 +1196,7 @@ Imports Microsoft.VisualBasic
         Me.OpenCloseAccess.Name = "OpenCloseAccess"
         Me.OpenCloseAccess.Size = New System.Drawing.Size(75, 23)
         Me.OpenCloseAccess.TabIndex = 35
-        Me.OpenCloseAccess.Text = "Button1"
+        Me.OpenCloseAccess.Text = "Button1.1"
         Me.OpenCloseAccess.UseVisualStyleBackColor = True
         '
         'BGReportDistributor

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="CompositeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StringValue" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:complexType name="ArrayOfUserList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserList" nillable="true" type="tns:UserList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserList" nillable="true" type="tns:ArrayOfUserList" />
+  <xs:complexType name="UserList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EMAIL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FULLNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INTERNAL_USER" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ISACTIVE" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MANAGEMENT_USER" type="xs:boolean" />
+      <xs:element minOccurs="0" name="USERID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserList" nillable="true" type="tns:UserList" />
+  <xs:complexType name="ArrayOfArchiveList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArchiveList" nillable="true" type="tns:ArchiveList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArchiveList" nillable="true" type="tns:ArrayOfArchiveList" />
+  <xs:complexType name="ArchiveList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ARCHIVEID" type="xs:int" />
+      <xs:element minOccurs="0" name="CONTAINER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CREATED" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DISTLIST" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMAILSENT" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FILENAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JOBFORMAT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JOBREF" type="xs:int" />
+      <xs:element minOccurs="0" name="JOBTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MEMO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PURGEAFTER" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SUBJECT" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArchiveList" nillable="true" type="tns:ArchiveList" />
+  <xs:complexType name="ArrayOfUserActivityList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserActivityList" nillable="true" type="tns:UserActivityList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserActivityList" nillable="true" type="tns:ArrayOfUserActivityList" />
+  <xs:complexType name="UserActivityList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ACTION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ARCHIVEID" type="xs:int" />
+      <xs:element minOccurs="0" name="ARCHIVEPATH" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CRITERIA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DATETIME" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DISTLIST" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ICON" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JOBID" type="xs:int" />
+      <xs:element minOccurs="0" name="MEMO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REPORTNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SHORT_DESC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USERID" type="xs:int" />
+      <xs:element minOccurs="0" name="USERNAME" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserActivityList" nillable="true" type="tns:UserActivityList" />
+  <xs:complexType name="ArrayOfAppsList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AppsList" nillable="true" type="tns:AppsList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAppsList" nillable="true" type="tns:ArrayOfAppsList" />
+  <xs:complexType name="AppsList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="APPID" type="xs:int" />
+      <xs:element minOccurs="0" name="APP_DIRECTORY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="APP_FILENAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DESCRIPTION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MDW_DIRECTORY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MDW_FILENAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PASSWORD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STARTUP_DIRECTORY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STARTUP_FILENAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STARTUP_OPTIONS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USERNAME" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppsList" nillable="true" type="tns:AppsList" />
+  <xs:complexType name="ArrayOfJobList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JobList" nillable="true" type="tns:JobList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJobList" nillable="true" type="tns:ArrayOfJobList" />
+  <xs:complexType name="JobList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="APPID" type="xs:int" />
+      <xs:element minOccurs="0" name="CONTAINER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CRITERIA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DESCRIPTION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DISTLIST" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FREQ" type="xs:int" />
+      <xs:element minOccurs="0" name="ICON" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INTERVAL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ISACTIVE" type="xs:boolean" />
+      <xs:element minOccurs="0" name="JOBID" type="xs:int" />
+      <xs:element minOccurs="0" name="LAST_ARCHIVEPATH" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LAST_RUN" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NEXT_SCHED" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OUTPUT_FORMAT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="REPORTID" type="xs:int" />
+      <xs:element minOccurs="0" name="REPORT_NAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SELECTED" type="xs:int" />
+      <xs:element minOccurs="0" name="TYPE" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JobList" nillable="true" type="tns:JobList" />
+  <xs:complexType name="ArrayOfMessageList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MessageList" nillable="true" type="tns:MessageList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMessageList" nillable="true" type="tns:ArrayOfMessageList" />
+  <xs:complexType name="MessageList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ACCESS_USERID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BODY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CCLIST" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CREATED" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DEL_FLAG" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DISTLIST" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMAILED" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LOT_SHIPPER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MESSAGE_TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="QA" type="xs:int" />
+      <xs:element minOccurs="0" name="SENT_BY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SENT_FLAG" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SUBJECT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TRIGGER" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MessageList" nillable="true" type="tns:MessageList" />
+  <xs:complexType name="ArrayOfAlertList">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AlertList" nillable="true" type="tns:AlertList" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAlertList" nillable="true" type="tns:ArrayOfAlertList" />
+  <xs:complexType name="AlertList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ELASPEDMINUTES" type="xs:int" />
+      <xs:element minOccurs="0" name="LOCATION" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MSGCOUNT" type="xs:int" />
+      <xs:element minOccurs="0" name="NEWEST" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OLDEST" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="QUEUENAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RECIPIENT" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AlertList" nillable="true" type="tns:AlertList" />
+</xs:schema>

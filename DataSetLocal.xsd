@@ -1,0 +1,178 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="DataSetLocal" targetNamespace="http://www.tempuri.org/DataSetLocal.xsd" xmlns:mstns="http://www.tempuri.org/DataSetLocal.xsd" xmlns="http://www.tempuri.org/DataSetLocal.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="DataSetLocal" msdata:IsDataSet="true">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="APPLICATION">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="APPLICATION" msdata:AutoIncrement="true" type="xs:int" />
+              <xs:element name="APPLICATION_OLD" type="xs:string" minOccurs="0" />
+              <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0" />
+              <xs:element name="PASSWORD" type="xs:string" minOccurs="0" />
+              <xs:element name="STARTUP_DIRECTORY" type="xs:string" minOccurs="0" />
+              <xs:element name="STARTUP_FILENAME" type="xs:string" minOccurs="0" />
+              <xs:element name="STARTUP_OPTIONS" type="xs:string" minOccurs="0" />
+              <xs:element name="TYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="USER" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DISTRIBUTION_LIST">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ACTIVE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" minOccurs="0" />
+              <xs:element name="JOB" type="xs:int" />
+              <xs:element name="USER" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HISTORY">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ACTION" type="xs:string" minOccurs="0" />
+              <xs:element name="ARCHIVE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="DATETIME_RUN" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DATETIME_SCHED" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="DISTRIBUTION_LIST" type="xs:string" minOccurs="0" />
+              <xs:element name="ERROR" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ERROR_CODE" type="xs:int" minOccurs="0" />
+              <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+              <xs:element name="INFO" type="xs:boolean" minOccurs="0" />
+              <xs:element name="JOB" type="xs:int" minOccurs="0" />
+              <xs:element name="LOCAL_FILENAME" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTCOME" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTPUT_DIRECTORY" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTPUT_FILENAME" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTPUT_FORMAT" type="xs:string" minOccurs="0" />
+              <xs:element name="PURGE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="REPORT_EMAILED" type="xs:boolean" minOccurs="0" />
+              <xs:element name="REPORT_GENERATED" type="xs:boolean" minOccurs="0" />
+              <xs:element name="REPORT_UPLOADED" type="xs:boolean" minOccurs="0" />
+              <xs:element name="WARNING" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="JOB">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ACTIVE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="APPLICATION" type="xs:string" minOccurs="0" />
+              <xs:element name="CRITERIA" type="xs:string" minOccurs="0" />
+              <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0" />
+              <xs:element name="END_TIME_OF_DAY" type="xs:string" minOccurs="0" />
+              <xs:element name="FREQ" type="xs:string" minOccurs="0" />
+              <xs:element name="FROM" type="xs:string" minOccurs="0" />
+              <xs:element name="JOB" type="xs:int" />
+              <xs:element name="LAST_SENT" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="NEXT_SCHED" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="OUTPUT_DIRECTORY" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTPUT_FILENAME" type="xs:string" minOccurs="0" />
+              <xs:element name="OUTPUT_FORMAT" type="xs:string" minOccurs="0" />
+              <xs:element name="QTY" type="xs:int" minOccurs="0" />
+              <xs:element name="REPORT" type="xs:int" minOccurs="0" />
+              <xs:element name="REPORT_OLD" type="xs:string" minOccurs="0" />
+              <xs:element name="START_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="START_TIME_OF_DAY" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="REPORT">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="APPLICATION" type="xs:int" minOccurs="0" />
+              <xs:element name="APPLICATION_OLD" type="xs:string" minOccurs="0" />
+              <xs:element name="CRITERIA" type="xs:string" minOccurs="0" />
+              <xs:element name="REPORT" msdata:AutoIncrement="true" type="xs:int" />
+              <xs:element name="REPORT_NAME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SETUP_OPTIONS">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ACCESS_PATH" type="xs:string" minOccurs="0" />
+              <xs:element name="ADDRESS" type="xs:string" minOccurs="0" />
+              <xs:element name="AUTO_LOAD" type="xs:boolean" minOccurs="0" />
+              <xs:element name="CHECK_FREQ" type="xs:int" minOccurs="0" />
+              <xs:element name="CITY" type="xs:string" minOccurs="0" />
+              <xs:element name="COMPANY" type="xs:string" minOccurs="0" />
+              <xs:element name="CURR_ACTIVITY" type="xs:string" minOccurs="0" />
+              <xs:element name="EMAIL" type="xs:string" minOccurs="0" />
+              <xs:element name="END_TIME_CHECK" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="ERROR_CONTACT" type="xs:string" minOccurs="0" />
+              <xs:element name="ERROR_EMAIL" type="xs:string" minOccurs="0" />
+              <xs:element name="FRI" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ID" msdata:AutoIncrement="true" type="xs:int" />
+              <xs:element name="LAST_UPDATED" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="LOG_MODE" type="xs:string" minOccurs="0" />
+              <xs:element name="MON" type="xs:boolean" minOccurs="0" />
+              <xs:element name="NOTIFY_ON_ERROR" type="xs:string" minOccurs="0" />
+              <xs:element name="RETAIN_HISTORY_DAYS" type="xs:int" minOccurs="0" />
+              <xs:element name="RETAIN_HISTORY_OCCUR" type="xs:int" minOccurs="0" />
+              <xs:element name="SAT" type="xs:boolean" minOccurs="0" />
+              <xs:element name="START_TIME_CHECK" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="STATE" type="xs:string" minOccurs="0" />
+              <xs:element name="SUN" type="xs:boolean" minOccurs="0" />
+              <xs:element name="TELEPHONE" type="xs:string" minOccurs="0" />
+              <xs:element name="THUR" type="xs:boolean" minOccurs="0" />
+              <xs:element name="TUE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="VERSION" type="xs:string" minOccurs="0" />
+              <xs:element name="WED" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ZIP" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="USERS">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ACTIVE" type="xs:boolean" minOccurs="0" />
+              <xs:element name="CONTACT" type="xs:string" minOccurs="0" />
+              <xs:element name="EMAIL" type="xs:string" minOccurs="0" />
+              <xs:element name="PASSWORD" type="xs:string" minOccurs="0" />
+              <xs:element name="USER" msdata:AutoIncrement="true" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:APPLICATION" />
+      <xs:field xpath="mstns:APPLICATION" />
+    </xs:unique>
+    <xs:unique name="DISTRIBUTION_LIST_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DISTRIBUTION_LIST" />
+      <xs:field xpath="mstns:JOB" />
+      <xs:field xpath="mstns:USER" />
+    </xs:unique>
+    <xs:unique name="HISTORY_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:HISTORY" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="JOB_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:JOB" />
+      <xs:field xpath="mstns:JOB" />
+    </xs:unique>
+    <xs:unique name="REPORT_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:REPORT" />
+      <xs:field xpath="mstns:REPORT" />
+    </xs:unique>
+    <xs:unique name="SETUP_OPTIONS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SETUP_OPTIONS" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="USERS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:USERS" />
+      <xs:field xpath="mstns:USER" />
+    </xs:unique>
+    <xs:keyref name="APPLICATIONREPORT" refer="Constraint1">
+      <xs:selector xpath=".//mstns:REPORT" />
+      <xs:field xpath="mstns:APPLICATION" />
+    </xs:keyref>
+    <xs:keyref name="REPORTJOB" refer="REPORT_Constraint1">
+      <xs:selector xpath=".//mstns:JOB" />
+      <xs:field xpath="mstns:REPORT" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

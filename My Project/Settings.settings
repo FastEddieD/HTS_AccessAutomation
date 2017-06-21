@@ -1,0 +1,66 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="FromUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">autoreports@ssitroy.com</Value>
+    </Setting>
+    <Setting Name="WorkstationName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Ed_New</Value>
+    </Setting>
+    <Setting Name="RunOnTimer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoStartOnLoad" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Freq" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="Offset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="WorkOffline" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="StartTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">12:00 AM</Value>
+    </Setting>
+    <Setting Name="EndTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">11:59 PM</Value>
+    </Setting>
+    <Setting Name="AutoShutDown" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastCheck" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-01-01</Value>
+    </Setting>
+    <Setting Name="DistributeFromServer" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DistributeFreq" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="LastDistributed" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-01-01</Value>
+    </Setting>
+    <Setting Name="DistributeOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="LastMessageRun" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2013-01-01</Value>
+    </Setting>
+    <Setting Name="SMTPServerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">smtp.sendgrid.net</Value>
+    </Setting>
+    <Setting Name="ccDistList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">autoreports@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com</Value>
+    </Setting>
+    <Setting Name="SMTPUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edolikian</Value>
+    </Setting>
+    <Setting Name="SMTPPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">S3ns1ble</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

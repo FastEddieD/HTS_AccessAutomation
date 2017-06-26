@@ -1196,7 +1196,7 @@ Imports Microsoft.VisualBasic
         Me.OpenCloseAccess.Name = "OpenCloseAccess"
         Me.OpenCloseAccess.Size = New System.Drawing.Size(75, 23)
         Me.OpenCloseAccess.TabIndex = 35
-        Me.OpenCloseAccess.Text = "Button1.1"
+        Me.OpenCloseAccess.Text = "Button2.1"
         Me.OpenCloseAccess.UseVisualStyleBackColor = True
         '
         'BGReportDistributor
@@ -2795,6 +2795,23 @@ ErrorHandler:
                     Catch ex As Exception
                         Return False
                     End Try
+                Case Is = "PDFx"
+                    Try
+                        cdi.DriverInit("CutePDF Writer")
+                        cdi.DefaultDirectory = outputdirectory
+                        cdi.DefaultFileName = localfilepath
+                        cdi.FileNameOptionsEx = 3
+                        cdi.SetDefaultPrinter()
+                        cdi.EnablePrinter("Sensible Solutions Inc.", "")
+                        ' cdi.EnablePrinter("Sensible Solutions Inc.", "07EFCDAB01000100FDF4C119DEED385CAED59A31B52748A879E4800C076E69A111BC87B4941C9C596C1D7E65D6C48370FF2A0CF1C1A8")
+                        oAccess.DoCmd.PrintOut()
+                        cdi.RestoreDefaultPrinter()
+
+
+
+                    Catch ex As Exception
+
+                    End Try
                 Case Is = "rtf"
                     '  oAccess.DoCmd.OutputTo(Access.AcOutputObjectType.acOutputReport, sreport, System.Windows.Forms.DataFormats.Rtf, outputfilepath, False)
                 Case Is = "snp"
@@ -2804,7 +2821,7 @@ ErrorHandler:
                 Case Is = "XLS"
                     '   oAccess.DoCmd.OutputTo(Access.AcOutputObjectType.acOutputQuery, sreport, System.Windows.Forms.DataFormats.Text, outputfilepath, False)
                     '  oAccess.DoCmd.OutputTo(Access.AcOutputObjectType.acOutputQuery, sreport, System.Windows.Forms.DataFormats.CommaSeparatedValue, outputfilename, False)
-                    '  outputfilepath = "c:\windows\system32\AR000289.xls"
+                    '  outputfilepath = "c:   \windows\system32\AR000289.xls"
 
                     oAccess.DoCmd.SetWarnings(vbFalse)
                     oAccess.DoCmd.TransferSpreadsheet(Access.AcDataTransferType.acExport, Access.AcSpreadSheetType.acSpreadsheetTypeExcel8, sreport, localfilepath, True, , True)

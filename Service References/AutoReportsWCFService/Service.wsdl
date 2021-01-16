@@ -27,9 +27,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://autoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://autoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://autoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import schemaLocation="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService_WSAvailable_InputMessage">
@@ -1219,10 +1219,10 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="BasicHttpBinding_IService" binding="tns:BasicHttpBinding_IService">
-      <soap:address location="http://autoreportswcfservice.azurewebsites.net/Service.svc" />
+      <soap:address location="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpsBinding_IService" binding="tns:BasicHttpsBinding_IService">
-      <soap:address location="https://autoreportswcfservice.azurewebsites.net/Service.svc" />
+      <soap:address location="https://htsazureautoreportswcfservice.azurewebsites.net/Service.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

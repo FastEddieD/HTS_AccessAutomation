@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="FromUserName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">autoreports@ssitroy.com</Value>
+      <Value Profile="(Default)">autoreports@htsmi.com</Value>
     </Setting>
     <Setting Name="WorkstationName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Ed_New</Value>
+      <Value Profile="(Default)">APP_02</Value>
     </Setting>
     <Setting Name="RunOnTimer" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -54,13 +54,13 @@
       <Value Profile="(Default)">smtp.sendgrid.net</Value>
     </Setting>
     <Setting Name="ccDistList" Type="System.String" Scope="User">
-      <Value Profile="(Default)">autoreports@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com</Value>
+      <Value Profile="(Default)">edolikian@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com</Value>
     </Setting>
     <Setting Name="SMTPUser" Type="System.String" Scope="User">
       <Value Profile="(Default)">edolikian</Value>
     </Setting>
     <Setting Name="SMTPPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">S3ns1ble</Value>
+      <Value Profile="(Default)">HtsmiX302</Value>
     </Setting>
   </Settings>
 </SettingsFile>

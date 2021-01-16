@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://autoreportswcfservice.azurewebsites.net/Service.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="b1656c85-d706-4131-9b12-5c4e22f5c53d" SourceId="1" SourceUrl="http://autoreportswcfservice.azurewebsites.net/Service.svc?wsdl" />
-    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="94c0549e-e9fe-4f9c-8515-c4d91d3bce0f" SourceId="1" SourceUrl="http://autoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service31.xsd" MetadataType="Schema" ID="ce95cc30-8607-4c0b-9a45-2ff1afdd9583" SourceId="1" SourceUrl="http://autoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service32.xsd" MetadataType="Schema" ID="29258bcf-2313-43ad-87c3-b7a290e61ba1" SourceId="1" SourceUrl="http://autoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="b459b507-14d8-4ce2-b576-faa5e1d68561" SourceId="1" SourceUrl="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?wsdl" />
+    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="730188fb-49d7-457c-8b94-07ddb2cf9e6b" SourceId="1" SourceUrl="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="02f1d211-5b18-4c6f-9ba9-b938deb6153a" SourceId="1" SourceUrl="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="babf8c94-79b0-4300-b3d4-ace5d12726e5" SourceId="1" SourceUrl="http://htsazureautoreportswcfservice.azurewebsites.net/Service.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

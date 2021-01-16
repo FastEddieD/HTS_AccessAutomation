@@ -1,4 +1,3 @@
-
 Imports System
 Imports System.Data
 Imports System.Net.Sockets
@@ -16,11 +15,15 @@ Imports Microsoft.Office
 Imports System.Collections
 Imports Microsoft.Office.Interop
 Imports Microsoft.WindowsAzure
+' Imports Microsoft.WindowsAzure.Storage
 Imports Microsoft.WindowsAzure.StorageClient
 Imports AccessAutomation.AutoReportsWCFService
 Imports System.Diagnostics.Process
 Imports Microsoft.Office.Interop.Access
 Imports Microsoft.VisualBasic
+Imports SendGrid
+
+' Imports SendGrid.Helpers.Mail
 
 
 <DnsPermissionAttribute(SecurityAction.Demand, Unrestricted:=True)> Public Class Schedule
@@ -120,6 +123,27 @@ Imports Microsoft.VisualBasic
     Friend WithEvents DataGridViewTextBoxColumn1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TRIGGERDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DELFLAGDataGridViewCheckBoxColumn As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents ACTIVEDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+    Friend WithEvents APPLICATIONDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents ENDTIMEOFDAYDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents FROMDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents JOBDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents LASTSENTDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents OUTPUTDIRECTORYDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents OUTPUTFILENAMEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents QTYDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents REPORTDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents REPORTOLDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents STARTDATEDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents STARTTIMEOFDAYDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents JOBBindingSource As BindingSource
+    Friend WithEvents DataSetLocal As DataSetLocal
+    Friend WithEvents Button1 As Button
     Dim ASNCheckComplete As Boolean = False
     Public Sub New()
         MyBase.New()
@@ -256,21 +280,6 @@ Imports Microsoft.VisualBasic
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.JobSchedule = New System.Windows.Forms.TabPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.ISACTIVEDataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.JOBIDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TYPEDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.REPORTNAMEDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DESCRIPTIONDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FREQDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.INTERVALDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LASTRUNDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NEXTSCHEDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CRITERIADataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CONTAINERDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DISTLISTDataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SELECTEDDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.JobListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ActivityLog = New System.Windows.Forms.TabPage()
         Me.dgActivityLog = New System.Windows.Forms.DataGrid()
@@ -297,48 +306,38 @@ Imports Microsoft.VisualBasic
         Me.dgASNList = New System.Windows.Forms.DataGrid()
         Me.OverdueList = New System.Windows.Forms.TabPage()
         Me.dgvOverdueJobs = New System.Windows.Forms.DataGridView()
-        Me.APPIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CONTAINERDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CRITERIADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DESCRIPTIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DISTLISTDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FREQDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ICONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.INTERVALDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ISACTIVEDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.JOBIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LASTRUNDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NEXTSCHEDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.REPORTIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.REPORTNAMEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SELECTEDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TYPEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ACTIVEDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.APPLICATIONDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ENDTIMEOFDAYDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FROMDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JOBDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LASTSENTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OUTPUTDIRECTORYDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OUTPUTFILENAMEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QTYDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.REPORTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.REPORTOLDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.STARTDATEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.STARTTIMEOFDAYDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JOBBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.DataSetLocal = New AccessAutomation.DataSetLocal()
         Me.Distribute = New System.Windows.Forms.TabPage()
         Me.dgvDistributionList = New System.Windows.Forms.DataGridView()
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.dgvMessageList = New System.Windows.Forms.DataGridView()
-        Me.QADataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MESSAGETYPEDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CREATEDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ACCESSUSERIDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DISTLISTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SUBJECTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TRIGGERDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DELFLAGDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.MessageListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.dgvAccessAlerts = New System.Windows.Forms.DataGridView()
-        Me.RECIPIENTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.QUEUENAME = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSGCOUNTDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.LOCATION = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OLDEST = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NEWEST = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ELASPEDMINUTESDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AlertListBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MessageListBindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.Online = New System.Windows.Forms.CheckBox()
@@ -365,37 +364,40 @@ Imports Microsoft.VisualBasic
         Me.SendingMessages = New System.Windows.Forms.CheckBox()
         Me.LastMessageRun = New System.Windows.Forms.TextBox()
         Me.Messenger = New System.Windows.Forms.Button()
-        CType(Me.Timer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabControl1.SuspendLayout()
-        Me.JobSchedule.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.JobListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ActivityLog.SuspendLayout()
-        CType(Me.dgActivityLog, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Users.SuspendLayout()
-        CType(Me.dgUserSubscriptions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgUserList2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Reports.SuspendLayout()
-        CType(Me.DataGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ASN.SuspendLayout()
-        CType(Me.dgASNList, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.OverdueList.SuspendLayout()
-        CType(Me.dgvOverdueJobs, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Distribute.SuspendLayout()
-        CType(Me.dgvDistributionList, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage1.SuspendLayout()
-        CType(Me.dgvMessageList, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MessageListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
-        CType(Me.dgvAccessAlerts, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AlertListBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MessageListBindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.Button1 = New System.Windows.Forms.Button()
+        CType(Me.Timer1,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabControl1.SuspendLayout
+        Me.JobSchedule.SuspendLayout
+        CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.JobListBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.ActivityLog.SuspendLayout
+        CType(Me.dgActivityLog,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Users.SuspendLayout
+        CType(Me.dgUserSubscriptions,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dgUserList2,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Reports.SuspendLayout
+        CType(Me.DataGrid1,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.ASN.SuspendLayout
+        CType(Me.dgASNList,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.OverdueList.SuspendLayout
+        CType(Me.dgvOverdueJobs,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.JOBBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.DataSetLocal,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Distribute.SuspendLayout
+        CType(Me.dgvDistributionList,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage1.SuspendLayout
+        CType(Me.dgvMessageList,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.MessageListBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage2.SuspendLayout
+        CType(Me.dgvAccessAlerts,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.AlertListBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.MessageListBindingSource1,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'Timer1
         '
-        Me.Timer1.Enabled = True
-        Me.Timer1.Interval = 1000.0R
+        Me.Timer1.Enabled = true
+        Me.Timer1.Interval = 1000R
         Me.Timer1.SynchronizingObject = Me
         '
         'NextCheck
@@ -408,7 +410,7 @@ Imports Microsoft.VisualBasic
         '
         'Running
         '
-        Me.Running.Checked = True
+        Me.Running.Checked = true
         Me.Running.CheckState = System.Windows.Forms.CheckState.Checked
         Me.Running.Location = New System.Drawing.Point(1091, 209)
         Me.Running.Name = "Running"
@@ -419,7 +421,7 @@ Imports Microsoft.VisualBasic
         'StatusBar
         '
         Me.StatusBar.BackColor = System.Drawing.SystemColors.Control
-        Me.StatusBar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StatusBar.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.StatusBar.Location = New System.Drawing.Point(53, 71)
         Me.StatusBar.Name = "StatusBar"
         Me.StatusBar.Size = New System.Drawing.Size(1063, 22)
@@ -428,7 +430,7 @@ Imports Microsoft.VisualBasic
         '
         'ImageList1
         '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"),System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "")
         Me.ImageList1.Images.SetKeyName(1, "")
@@ -470,111 +472,14 @@ Imports Microsoft.VisualBasic
         '
         'DataGridView1
         '
-        Me.DataGridView1.AutoGenerateColumns = False
+        Me.DataGridView1.AutoGenerateColumns = false
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ISACTIVEDataGridViewCheckBoxColumn1, Me.JOBIDDataGridViewTextBoxColumn1, Me.TYPEDataGridViewTextBoxColumn1, Me.REPORTNAMEDataGridViewTextBoxColumn1, Me.DESCRIPTIONDataGridViewTextBoxColumn1, Me.FREQDataGridViewTextBoxColumn1, Me.INTERVALDataGridViewTextBoxColumn1, Me.LASTRUNDataGridViewTextBoxColumn1, Me.NEXTSCHEDDataGridViewTextBoxColumn1, Me.CRITERIADataGridViewTextBoxColumn1, Me.CONTAINERDataGridViewTextBoxColumn1, Me.OUTPUTFORMATDataGridViewTextBoxColumn1, Me.LASTARCHIVEPATHDataGridViewTextBoxColumn1, Me.DISTLISTDataGridViewTextBoxColumn2, Me.SELECTEDDataGridViewTextBoxColumn1})
         Me.DataGridView1.DataSource = Me.JobListBindingSource
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(952, 356)
         Me.DataGridView1.TabIndex = 0
-        '
-        'ISACTIVEDataGridViewCheckBoxColumn1
-        '
-        Me.ISACTIVEDataGridViewCheckBoxColumn1.DataPropertyName = "ISACTIVE"
-        Me.ISACTIVEDataGridViewCheckBoxColumn1.HeaderText = "A"
-        Me.ISACTIVEDataGridViewCheckBoxColumn1.Name = "ISACTIVEDataGridViewCheckBoxColumn1"
-        Me.ISACTIVEDataGridViewCheckBoxColumn1.Width = 25
-        '
-        'JOBIDDataGridViewTextBoxColumn1
-        '
-        Me.JOBIDDataGridViewTextBoxColumn1.DataPropertyName = "JOBID"
-        Me.JOBIDDataGridViewTextBoxColumn1.HeaderText = "JOB"
-        Me.JOBIDDataGridViewTextBoxColumn1.Name = "JOBIDDataGridViewTextBoxColumn1"
-        Me.JOBIDDataGridViewTextBoxColumn1.Width = 50
-        '
-        'TYPEDataGridViewTextBoxColumn1
-        '
-        Me.TYPEDataGridViewTextBoxColumn1.DataPropertyName = "TYPE"
-        Me.TYPEDataGridViewTextBoxColumn1.HeaderText = "TYPE"
-        Me.TYPEDataGridViewTextBoxColumn1.Name = "TYPEDataGridViewTextBoxColumn1"
-        '
-        'REPORTNAMEDataGridViewTextBoxColumn1
-        '
-        Me.REPORTNAMEDataGridViewTextBoxColumn1.DataPropertyName = "REPORT_NAME"
-        Me.REPORTNAMEDataGridViewTextBoxColumn1.HeaderText = "REPORT_NAME"
-        Me.REPORTNAMEDataGridViewTextBoxColumn1.Name = "REPORTNAMEDataGridViewTextBoxColumn1"
-        '
-        'DESCRIPTIONDataGridViewTextBoxColumn1
-        '
-        Me.DESCRIPTIONDataGridViewTextBoxColumn1.DataPropertyName = "DESCRIPTION"
-        Me.DESCRIPTIONDataGridViewTextBoxColumn1.HeaderText = "DESCRIPTION"
-        Me.DESCRIPTIONDataGridViewTextBoxColumn1.Name = "DESCRIPTIONDataGridViewTextBoxColumn1"
-        '
-        'FREQDataGridViewTextBoxColumn1
-        '
-        Me.FREQDataGridViewTextBoxColumn1.DataPropertyName = "FREQ"
-        Me.FREQDataGridViewTextBoxColumn1.HeaderText = "FREQ"
-        Me.FREQDataGridViewTextBoxColumn1.Name = "FREQDataGridViewTextBoxColumn1"
-        '
-        'INTERVALDataGridViewTextBoxColumn1
-        '
-        Me.INTERVALDataGridViewTextBoxColumn1.DataPropertyName = "INTERVAL"
-        Me.INTERVALDataGridViewTextBoxColumn1.HeaderText = "INTERVAL"
-        Me.INTERVALDataGridViewTextBoxColumn1.Name = "INTERVALDataGridViewTextBoxColumn1"
-        '
-        'LASTRUNDataGridViewTextBoxColumn1
-        '
-        Me.LASTRUNDataGridViewTextBoxColumn1.DataPropertyName = "LAST_RUN"
-        Me.LASTRUNDataGridViewTextBoxColumn1.HeaderText = "LAST_RUN"
-        Me.LASTRUNDataGridViewTextBoxColumn1.Name = "LASTRUNDataGridViewTextBoxColumn1"
-        '
-        'NEXTSCHEDDataGridViewTextBoxColumn1
-        '
-        Me.NEXTSCHEDDataGridViewTextBoxColumn1.DataPropertyName = "NEXT_SCHED"
-        Me.NEXTSCHEDDataGridViewTextBoxColumn1.HeaderText = "NEXT_SCHED"
-        Me.NEXTSCHEDDataGridViewTextBoxColumn1.Name = "NEXTSCHEDDataGridViewTextBoxColumn1"
-        '
-        'CRITERIADataGridViewTextBoxColumn1
-        '
-        Me.CRITERIADataGridViewTextBoxColumn1.DataPropertyName = "CRITERIA"
-        Me.CRITERIADataGridViewTextBoxColumn1.HeaderText = "CRITERIA"
-        Me.CRITERIADataGridViewTextBoxColumn1.Name = "CRITERIADataGridViewTextBoxColumn1"
-        '
-        'CONTAINERDataGridViewTextBoxColumn1
-        '
-        Me.CONTAINERDataGridViewTextBoxColumn1.DataPropertyName = "CONTAINER"
-        Me.CONTAINERDataGridViewTextBoxColumn1.HeaderText = "CONTAINER"
-        Me.CONTAINERDataGridViewTextBoxColumn1.Name = "CONTAINERDataGridViewTextBoxColumn1"
-        '
-        'OUTPUTFORMATDataGridViewTextBoxColumn1
-        '
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn1.DataPropertyName = "OUTPUT_FORMAT"
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn1.HeaderText = "OUTPUT_FORMAT"
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn1.Name = "OUTPUTFORMATDataGridViewTextBoxColumn1"
-        '
-        'LASTARCHIVEPATHDataGridViewTextBoxColumn1
-        '
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn1.DataPropertyName = "LAST_ARCHIVEPATH"
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn1.HeaderText = "LAST_ARCHIVEPATH"
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn1.Name = "LASTARCHIVEPATHDataGridViewTextBoxColumn1"
-        '
-        'DISTLISTDataGridViewTextBoxColumn2
-        '
-        Me.DISTLISTDataGridViewTextBoxColumn2.DataPropertyName = "DISTLIST"
-        Me.DISTLISTDataGridViewTextBoxColumn2.HeaderText = "DISTLIST"
-        Me.DISTLISTDataGridViewTextBoxColumn2.Name = "DISTLISTDataGridViewTextBoxColumn2"
-        '
-        'SELECTEDDataGridViewTextBoxColumn1
-        '
-        Me.SELECTEDDataGridViewTextBoxColumn1.DataPropertyName = "SELECTED"
-        Me.SELECTEDDataGridViewTextBoxColumn1.HeaderText = "SELECTED"
-        Me.SELECTEDDataGridViewTextBoxColumn1.Name = "SELECTEDDataGridViewTextBoxColumn1"
-        '
-        'JobListBindingSource
-        '
-        Me.JobListBindingSource.DataSource = GetType(AccessAutomation.AutoReportsWCFService.JobList)
         '
         'ActivityLog
         '
@@ -779,127 +684,137 @@ Imports Microsoft.VisualBasic
         Me.OverdueList.Size = New System.Drawing.Size(952, 356)
         Me.OverdueList.TabIndex = 6
         Me.OverdueList.Text = "OverdueList"
-        Me.OverdueList.UseVisualStyleBackColor = True
+        Me.OverdueList.UseVisualStyleBackColor = true
         '
         'dgvOverdueJobs
         '
-        Me.dgvOverdueJobs.AutoGenerateColumns = False
+        Me.dgvOverdueJobs.AutoGenerateColumns = false
         Me.dgvOverdueJobs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvOverdueJobs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.APPIDDataGridViewTextBoxColumn, Me.CONTAINERDataGridViewTextBoxColumn, Me.CRITERIADataGridViewTextBoxColumn, Me.DESCRIPTIONDataGridViewTextBoxColumn, Me.DISTLISTDataGridViewTextBoxColumn1, Me.FREQDataGridViewTextBoxColumn, Me.ICONDataGridViewTextBoxColumn, Me.INTERVALDataGridViewTextBoxColumn, Me.ISACTIVEDataGridViewCheckBoxColumn, Me.JOBIDDataGridViewTextBoxColumn, Me.LASTARCHIVEPATHDataGridViewTextBoxColumn, Me.LASTRUNDataGridViewTextBoxColumn, Me.NEXTSCHEDDataGridViewTextBoxColumn, Me.OUTPUTFORMATDataGridViewTextBoxColumn, Me.REPORTIDDataGridViewTextBoxColumn, Me.REPORTNAMEDataGridViewTextBoxColumn, Me.SELECTEDDataGridViewTextBoxColumn, Me.TYPEDataGridViewTextBoxColumn})
-        Me.dgvOverdueJobs.DataSource = Me.JobListBindingSource
+        Me.dgvOverdueJobs.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ACTIVEDataGridViewCheckBoxColumn, Me.APPLICATIONDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.ENDTIMEOFDAYDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn4, Me.FROMDataGridViewTextBoxColumn, Me.JOBDataGridViewTextBoxColumn, Me.LASTSENTDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn5, Me.OUTPUTDIRECTORYDataGridViewTextBoxColumn, Me.OUTPUTFILENAMEDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn6, Me.QTYDataGridViewTextBoxColumn, Me.REPORTDataGridViewTextBoxColumn, Me.REPORTOLDDataGridViewTextBoxColumn, Me.STARTDATEDataGridViewTextBoxColumn, Me.STARTTIMEOFDAYDataGridViewTextBoxColumn})
+        Me.dgvOverdueJobs.DataSource = Me.JOBBindingSource
         Me.dgvOverdueJobs.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvOverdueJobs.Location = New System.Drawing.Point(0, 0)
         Me.dgvOverdueJobs.Name = "dgvOverdueJobs"
         Me.dgvOverdueJobs.Size = New System.Drawing.Size(952, 356)
         Me.dgvOverdueJobs.TabIndex = 0
         '
-        'APPIDDataGridViewTextBoxColumn
+        'ACTIVEDataGridViewCheckBoxColumn
         '
-        Me.APPIDDataGridViewTextBoxColumn.DataPropertyName = "APPID"
-        Me.APPIDDataGridViewTextBoxColumn.HeaderText = "APPID"
-        Me.APPIDDataGridViewTextBoxColumn.Name = "APPIDDataGridViewTextBoxColumn"
+        Me.ACTIVEDataGridViewCheckBoxColumn.DataPropertyName = "ACTIVE"
+        Me.ACTIVEDataGridViewCheckBoxColumn.HeaderText = "ACTIVE"
+        Me.ACTIVEDataGridViewCheckBoxColumn.Name = "ACTIVEDataGridViewCheckBoxColumn"
         '
-        'CONTAINERDataGridViewTextBoxColumn
+        'APPLICATIONDataGridViewTextBoxColumn
         '
-        Me.CONTAINERDataGridViewTextBoxColumn.DataPropertyName = "CONTAINER"
-        Me.CONTAINERDataGridViewTextBoxColumn.HeaderText = "CONTAINER"
-        Me.CONTAINERDataGridViewTextBoxColumn.Name = "CONTAINERDataGridViewTextBoxColumn"
+        Me.APPLICATIONDataGridViewTextBoxColumn.DataPropertyName = "APPLICATION"
+        Me.APPLICATIONDataGridViewTextBoxColumn.HeaderText = "APPLICATION"
+        Me.APPLICATIONDataGridViewTextBoxColumn.Name = "APPLICATIONDataGridViewTextBoxColumn"
         '
-        'CRITERIADataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn2
         '
-        Me.CRITERIADataGridViewTextBoxColumn.DataPropertyName = "CRITERIA"
-        Me.CRITERIADataGridViewTextBoxColumn.HeaderText = "CRITERIA"
-        Me.CRITERIADataGridViewTextBoxColumn.Name = "CRITERIADataGridViewTextBoxColumn"
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "CRITERIA"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "CRITERIA"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         '
-        'DESCRIPTIONDataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn3
         '
-        Me.DESCRIPTIONDataGridViewTextBoxColumn.DataPropertyName = "DESCRIPTION"
-        Me.DESCRIPTIONDataGridViewTextBoxColumn.HeaderText = "DESCRIPTION"
-        Me.DESCRIPTIONDataGridViewTextBoxColumn.Name = "DESCRIPTIONDataGridViewTextBoxColumn"
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "DESCRIPTION"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "DESCRIPTION"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         '
-        'DISTLISTDataGridViewTextBoxColumn1
+        'ENDTIMEOFDAYDataGridViewTextBoxColumn
         '
-        Me.DISTLISTDataGridViewTextBoxColumn1.DataPropertyName = "DISTLIST"
-        Me.DISTLISTDataGridViewTextBoxColumn1.HeaderText = "DISTLIST"
-        Me.DISTLISTDataGridViewTextBoxColumn1.Name = "DISTLISTDataGridViewTextBoxColumn1"
+        Me.ENDTIMEOFDAYDataGridViewTextBoxColumn.DataPropertyName = "END_TIME_OF_DAY"
+        Me.ENDTIMEOFDAYDataGridViewTextBoxColumn.HeaderText = "END_TIME_OF_DAY"
+        Me.ENDTIMEOFDAYDataGridViewTextBoxColumn.Name = "ENDTIMEOFDAYDataGridViewTextBoxColumn"
         '
-        'FREQDataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn4
         '
-        Me.FREQDataGridViewTextBoxColumn.DataPropertyName = "FREQ"
-        Me.FREQDataGridViewTextBoxColumn.HeaderText = "FREQ"
-        Me.FREQDataGridViewTextBoxColumn.Name = "FREQDataGridViewTextBoxColumn"
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "FREQ"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "FREQ"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         '
-        'ICONDataGridViewTextBoxColumn
+        'FROMDataGridViewTextBoxColumn
         '
-        Me.ICONDataGridViewTextBoxColumn.DataPropertyName = "ICON"
-        Me.ICONDataGridViewTextBoxColumn.HeaderText = "ICON"
-        Me.ICONDataGridViewTextBoxColumn.Name = "ICONDataGridViewTextBoxColumn"
+        Me.FROMDataGridViewTextBoxColumn.DataPropertyName = "FROM"
+        Me.FROMDataGridViewTextBoxColumn.HeaderText = "FROM"
+        Me.FROMDataGridViewTextBoxColumn.Name = "FROMDataGridViewTextBoxColumn"
         '
-        'INTERVALDataGridViewTextBoxColumn
+        'JOBDataGridViewTextBoxColumn
         '
-        Me.INTERVALDataGridViewTextBoxColumn.DataPropertyName = "INTERVAL"
-        Me.INTERVALDataGridViewTextBoxColumn.HeaderText = "INTERVAL"
-        Me.INTERVALDataGridViewTextBoxColumn.Name = "INTERVALDataGridViewTextBoxColumn"
+        Me.JOBDataGridViewTextBoxColumn.DataPropertyName = "JOB"
+        Me.JOBDataGridViewTextBoxColumn.HeaderText = "JOB"
+        Me.JOBDataGridViewTextBoxColumn.Name = "JOBDataGridViewTextBoxColumn"
         '
-        'ISACTIVEDataGridViewCheckBoxColumn
+        'LASTSENTDataGridViewTextBoxColumn
         '
-        Me.ISACTIVEDataGridViewCheckBoxColumn.DataPropertyName = "ISACTIVE"
-        Me.ISACTIVEDataGridViewCheckBoxColumn.HeaderText = "ISACTIVE"
-        Me.ISACTIVEDataGridViewCheckBoxColumn.Name = "ISACTIVEDataGridViewCheckBoxColumn"
+        Me.LASTSENTDataGridViewTextBoxColumn.DataPropertyName = "LAST_SENT"
+        Me.LASTSENTDataGridViewTextBoxColumn.HeaderText = "LAST_SENT"
+        Me.LASTSENTDataGridViewTextBoxColumn.Name = "LASTSENTDataGridViewTextBoxColumn"
         '
-        'JOBIDDataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn5
         '
-        Me.JOBIDDataGridViewTextBoxColumn.DataPropertyName = "JOBID"
-        Me.JOBIDDataGridViewTextBoxColumn.HeaderText = "JOBID"
-        Me.JOBIDDataGridViewTextBoxColumn.Name = "JOBIDDataGridViewTextBoxColumn"
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "NEXT_SCHED"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "NEXT_SCHED"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         '
-        'LASTARCHIVEPATHDataGridViewTextBoxColumn
+        'OUTPUTDIRECTORYDataGridViewTextBoxColumn
         '
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn.DataPropertyName = "LAST_ARCHIVEPATH"
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn.HeaderText = "LAST_ARCHIVEPATH"
-        Me.LASTARCHIVEPATHDataGridViewTextBoxColumn.Name = "LASTARCHIVEPATHDataGridViewTextBoxColumn"
+        Me.OUTPUTDIRECTORYDataGridViewTextBoxColumn.DataPropertyName = "OUTPUT_DIRECTORY"
+        Me.OUTPUTDIRECTORYDataGridViewTextBoxColumn.HeaderText = "OUTPUT_DIRECTORY"
+        Me.OUTPUTDIRECTORYDataGridViewTextBoxColumn.Name = "OUTPUTDIRECTORYDataGridViewTextBoxColumn"
         '
-        'LASTRUNDataGridViewTextBoxColumn
+        'OUTPUTFILENAMEDataGridViewTextBoxColumn
         '
-        Me.LASTRUNDataGridViewTextBoxColumn.DataPropertyName = "LAST_RUN"
-        Me.LASTRUNDataGridViewTextBoxColumn.HeaderText = "LAST_RUN"
-        Me.LASTRUNDataGridViewTextBoxColumn.Name = "LASTRUNDataGridViewTextBoxColumn"
+        Me.OUTPUTFILENAMEDataGridViewTextBoxColumn.DataPropertyName = "OUTPUT_FILENAME"
+        Me.OUTPUTFILENAMEDataGridViewTextBoxColumn.HeaderText = "OUTPUT_FILENAME"
+        Me.OUTPUTFILENAMEDataGridViewTextBoxColumn.Name = "OUTPUTFILENAMEDataGridViewTextBoxColumn"
         '
-        'NEXTSCHEDDataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn6
         '
-        Me.NEXTSCHEDDataGridViewTextBoxColumn.DataPropertyName = "NEXT_SCHED"
-        Me.NEXTSCHEDDataGridViewTextBoxColumn.HeaderText = "NEXT_SCHED"
-        Me.NEXTSCHEDDataGridViewTextBoxColumn.Name = "NEXTSCHEDDataGridViewTextBoxColumn"
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "OUTPUT_FORMAT"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "OUTPUT_FORMAT"
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
         '
-        'OUTPUTFORMATDataGridViewTextBoxColumn
+        'QTYDataGridViewTextBoxColumn
         '
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn.DataPropertyName = "OUTPUT_FORMAT"
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn.HeaderText = "OUTPUT_FORMAT"
-        Me.OUTPUTFORMATDataGridViewTextBoxColumn.Name = "OUTPUTFORMATDataGridViewTextBoxColumn"
+        Me.QTYDataGridViewTextBoxColumn.DataPropertyName = "QTY"
+        Me.QTYDataGridViewTextBoxColumn.HeaderText = "QTY"
+        Me.QTYDataGridViewTextBoxColumn.Name = "QTYDataGridViewTextBoxColumn"
         '
-        'REPORTIDDataGridViewTextBoxColumn
+        'REPORTDataGridViewTextBoxColumn
         '
-        Me.REPORTIDDataGridViewTextBoxColumn.DataPropertyName = "REPORTID"
-        Me.REPORTIDDataGridViewTextBoxColumn.HeaderText = "REPORTID"
-        Me.REPORTIDDataGridViewTextBoxColumn.Name = "REPORTIDDataGridViewTextBoxColumn"
+        Me.REPORTDataGridViewTextBoxColumn.DataPropertyName = "REPORT"
+        Me.REPORTDataGridViewTextBoxColumn.HeaderText = "REPORT"
+        Me.REPORTDataGridViewTextBoxColumn.Name = "REPORTDataGridViewTextBoxColumn"
         '
-        'REPORTNAMEDataGridViewTextBoxColumn
+        'REPORTOLDDataGridViewTextBoxColumn
         '
-        Me.REPORTNAMEDataGridViewTextBoxColumn.DataPropertyName = "REPORT_NAME"
-        Me.REPORTNAMEDataGridViewTextBoxColumn.HeaderText = "REPORT_NAME"
-        Me.REPORTNAMEDataGridViewTextBoxColumn.Name = "REPORTNAMEDataGridViewTextBoxColumn"
+        Me.REPORTOLDDataGridViewTextBoxColumn.DataPropertyName = "REPORT_OLD"
+        Me.REPORTOLDDataGridViewTextBoxColumn.HeaderText = "REPORT_OLD"
+        Me.REPORTOLDDataGridViewTextBoxColumn.Name = "REPORTOLDDataGridViewTextBoxColumn"
         '
-        'SELECTEDDataGridViewTextBoxColumn
+        'STARTDATEDataGridViewTextBoxColumn
         '
-        Me.SELECTEDDataGridViewTextBoxColumn.DataPropertyName = "SELECTED"
-        Me.SELECTEDDataGridViewTextBoxColumn.HeaderText = "SELECTED"
-        Me.SELECTEDDataGridViewTextBoxColumn.Name = "SELECTEDDataGridViewTextBoxColumn"
+        Me.STARTDATEDataGridViewTextBoxColumn.DataPropertyName = "START_DATE"
+        Me.STARTDATEDataGridViewTextBoxColumn.HeaderText = "START_DATE"
+        Me.STARTDATEDataGridViewTextBoxColumn.Name = "STARTDATEDataGridViewTextBoxColumn"
         '
-        'TYPEDataGridViewTextBoxColumn
+        'STARTTIMEOFDAYDataGridViewTextBoxColumn
         '
-        Me.TYPEDataGridViewTextBoxColumn.DataPropertyName = "TYPE"
-        Me.TYPEDataGridViewTextBoxColumn.HeaderText = "TYPE"
-        Me.TYPEDataGridViewTextBoxColumn.Name = "TYPEDataGridViewTextBoxColumn"
+        Me.STARTTIMEOFDAYDataGridViewTextBoxColumn.DataPropertyName = "START_TIME_OF_DAY"
+        Me.STARTTIMEOFDAYDataGridViewTextBoxColumn.HeaderText = "START_TIME_OF_DAY"
+        Me.STARTTIMEOFDAYDataGridViewTextBoxColumn.Name = "STARTTIMEOFDAYDataGridViewTextBoxColumn"
+        '
+        'JOBBindingSource
+        '
+        Me.JOBBindingSource.DataMember = "JOB"
+        Me.JOBBindingSource.DataSource = Me.DataSetLocal
+        '
+        'DataSetLocal
+        '
+        Me.DataSetLocal.DataSetName = "DataSetLocal"
+        Me.DataSetLocal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Distribute
         '
@@ -910,7 +825,7 @@ Imports Microsoft.VisualBasic
         Me.Distribute.Size = New System.Drawing.Size(952, 356)
         Me.Distribute.TabIndex = 7
         Me.Distribute.Text = "Distribute List"
-        Me.Distribute.UseVisualStyleBackColor = True
+        Me.Distribute.UseVisualStyleBackColor = true
         '
         'dgvDistributionList
         '
@@ -936,76 +851,20 @@ Imports Microsoft.VisualBasic
         Me.TabPage1.Size = New System.Drawing.Size(952, 356)
         Me.TabPage1.TabIndex = 8
         Me.TabPage1.Text = "EmailMessages"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.TabPage1.UseVisualStyleBackColor = true
         '
         'dgvMessageList
         '
-        Me.dgvMessageList.AutoGenerateColumns = False
+        Me.dgvMessageList.AutoGenerateColumns = false
         Me.dgvMessageList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvMessageList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QADataGridViewTextBoxColumn, Me.MESSAGETYPEDataGridViewTextBoxColumn, Me.CREATEDDataGridViewTextBoxColumn, Me.ACCESSUSERIDDataGridViewTextBoxColumn, Me.DISTLISTDataGridViewTextBoxColumn, Me.SUBJECTDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn1, Me.TRIGGERDataGridViewTextBoxColumn, Me.DELFLAGDataGridViewCheckBoxColumn})
         Me.dgvMessageList.DataSource = Me.MessageListBindingSource
         Me.dgvMessageList.Location = New System.Drawing.Point(12, 22)
         Me.dgvMessageList.Name = "dgvMessageList"
         Me.dgvMessageList.Size = New System.Drawing.Size(918, 313)
         Me.dgvMessageList.TabIndex = 0
         '
-        'QADataGridViewTextBoxColumn
-        '
-        Me.QADataGridViewTextBoxColumn.DataPropertyName = "QA"
-        Me.QADataGridViewTextBoxColumn.HeaderText = "QA"
-        Me.QADataGridViewTextBoxColumn.Name = "QADataGridViewTextBoxColumn"
-        '
-        'MESSAGETYPEDataGridViewTextBoxColumn
-        '
-        Me.MESSAGETYPEDataGridViewTextBoxColumn.DataPropertyName = "MESSAGE_TYPE"
-        Me.MESSAGETYPEDataGridViewTextBoxColumn.HeaderText = "MESSAGE_TYPE"
-        Me.MESSAGETYPEDataGridViewTextBoxColumn.Name = "MESSAGETYPEDataGridViewTextBoxColumn"
-        '
-        'CREATEDDataGridViewTextBoxColumn
-        '
-        Me.CREATEDDataGridViewTextBoxColumn.DataPropertyName = "CREATED"
-        Me.CREATEDDataGridViewTextBoxColumn.HeaderText = "CREATED"
-        Me.CREATEDDataGridViewTextBoxColumn.Name = "CREATEDDataGridViewTextBoxColumn"
-        '
-        'ACCESSUSERIDDataGridViewTextBoxColumn
-        '
-        Me.ACCESSUSERIDDataGridViewTextBoxColumn.DataPropertyName = "ACCESS_USERID"
-        Me.ACCESSUSERIDDataGridViewTextBoxColumn.HeaderText = "ACCESS_USERID"
-        Me.ACCESSUSERIDDataGridViewTextBoxColumn.Name = "ACCESSUSERIDDataGridViewTextBoxColumn"
-        '
-        'DISTLISTDataGridViewTextBoxColumn
-        '
-        Me.DISTLISTDataGridViewTextBoxColumn.DataPropertyName = "DISTLIST"
-        Me.DISTLISTDataGridViewTextBoxColumn.HeaderText = "DISTLIST"
-        Me.DISTLISTDataGridViewTextBoxColumn.Name = "DISTLISTDataGridViewTextBoxColumn"
-        '
-        'SUBJECTDataGridViewTextBoxColumn
-        '
-        Me.SUBJECTDataGridViewTextBoxColumn.DataPropertyName = "SUBJECT"
-        Me.SUBJECTDataGridViewTextBoxColumn.HeaderText = "SUBJECT"
-        Me.SUBJECTDataGridViewTextBoxColumn.Name = "SUBJECTDataGridViewTextBoxColumn"
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "SENT_BY"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "SENT_BY"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'TRIGGERDataGridViewTextBoxColumn
-        '
-        Me.TRIGGERDataGridViewTextBoxColumn.DataPropertyName = "TRIGGER"
-        Me.TRIGGERDataGridViewTextBoxColumn.HeaderText = "TRIGGER"
-        Me.TRIGGERDataGridViewTextBoxColumn.Name = "TRIGGERDataGridViewTextBoxColumn"
-        '
-        'DELFLAGDataGridViewCheckBoxColumn
-        '
-        Me.DELFLAGDataGridViewCheckBoxColumn.DataPropertyName = "DEL_FLAG"
-        Me.DELFLAGDataGridViewCheckBoxColumn.HeaderText = "DEL_FLAG"
-        Me.DELFLAGDataGridViewCheckBoxColumn.Name = "DELFLAGDataGridViewCheckBoxColumn"
-        '
         'MessageListBindingSource
         '
-        Me.MessageListBindingSource.DataSource = GetType(AccessAutomation.AutoReportsWCFService.MessageList)
         '
         'TabPage2
         '
@@ -1016,13 +875,13 @@ Imports Microsoft.VisualBasic
         Me.TabPage2.Size = New System.Drawing.Size(952, 356)
         Me.TabPage2.TabIndex = 9
         Me.TabPage2.Text = "AccessAlerts"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.TabPage2.UseVisualStyleBackColor = true
         '
         'dgvAccessAlerts
         '
-        Me.dgvAccessAlerts.AutoGenerateColumns = False
+        Me.dgvAccessAlerts.AutoGenerateColumns = false
         Me.dgvAccessAlerts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvAccessAlerts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RECIPIENTDataGridViewTextBoxColumn, Me.QUEUENAME, Me.MSGCOUNTDataGridViewTextBoxColumn, Me.LOCATION, Me.OLDEST, Me.NEWEST, Me.ELASPEDMINUTESDataGridViewTextBoxColumn})
+        Me.dgvAccessAlerts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QUEUENAME, Me.LOCATION, Me.OLDEST, Me.NEWEST})
         Me.dgvAccessAlerts.DataSource = Me.AlertListBindingSource
         Me.dgvAccessAlerts.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvAccessAlerts.Location = New System.Drawing.Point(3, 3)
@@ -1030,25 +889,12 @@ Imports Microsoft.VisualBasic
         Me.dgvAccessAlerts.Size = New System.Drawing.Size(946, 350)
         Me.dgvAccessAlerts.TabIndex = 0
         '
-        'RECIPIENTDataGridViewTextBoxColumn
-        '
-        Me.RECIPIENTDataGridViewTextBoxColumn.DataPropertyName = "RECIPIENT"
-        Me.RECIPIENTDataGridViewTextBoxColumn.HeaderText = "RECIPIENT"
-        Me.RECIPIENTDataGridViewTextBoxColumn.Name = "RECIPIENTDataGridViewTextBoxColumn"
-        Me.RECIPIENTDataGridViewTextBoxColumn.Width = 75
-        '
         'QUEUENAME
         '
         Me.QUEUENAME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.QUEUENAME.DataPropertyName = "QUEUENAME"
         Me.QUEUENAME.HeaderText = "QUEUENAME"
         Me.QUEUENAME.Name = "QUEUENAME"
-        '
-        'MSGCOUNTDataGridViewTextBoxColumn
-        '
-        Me.MSGCOUNTDataGridViewTextBoxColumn.DataPropertyName = "MSGCOUNT"
-        Me.MSGCOUNTDataGridViewTextBoxColumn.HeaderText = "MSGCOUNT"
-        Me.MSGCOUNTDataGridViewTextBoxColumn.Name = "MSGCOUNTDataGridViewTextBoxColumn"
         '
         'LOCATION
         '
@@ -1069,20 +915,6 @@ Imports Microsoft.VisualBasic
         Me.NEWEST.HeaderText = "NEWEST"
         Me.NEWEST.Name = "NEWEST"
         Me.NEWEST.Width = 150
-        '
-        'ELASPEDMINUTESDataGridViewTextBoxColumn
-        '
-        Me.ELASPEDMINUTESDataGridViewTextBoxColumn.DataPropertyName = "ELASPEDMINUTES"
-        Me.ELASPEDMINUTESDataGridViewTextBoxColumn.HeaderText = "ELASPEDMINUTES"
-        Me.ELASPEDMINUTESDataGridViewTextBoxColumn.Name = "ELASPEDMINUTESDataGridViewTextBoxColumn"
-        '
-        'AlertListBindingSource
-        '
-        Me.AlertListBindingSource.DataSource = GetType(AccessAutomation.AutoReportsWCFService.AlertList)
-        '
-        'MessageListBindingSource1
-        '
-        Me.MessageListBindingSource1.DataSource = GetType(AccessAutomation.AutoReportsWCFService.MessageList)
         '
         'Online
         '
@@ -1123,7 +955,7 @@ Imports Microsoft.VisualBasic
         Me.RunReportsButton.Size = New System.Drawing.Size(75, 23)
         Me.RunReportsButton.TabIndex = 27
         Me.RunReportsButton.Text = "Run Reports"
-        Me.RunReportsButton.UseVisualStyleBackColor = True
+        Me.RunReportsButton.UseVisualStyleBackColor = true
         '
         'LastCheck
         '
@@ -1142,8 +974,8 @@ Imports Microsoft.VisualBasic
         '
         'BGReportGenerator
         '
-        Me.BGReportGenerator.WorkerReportsProgress = True
-        Me.BGReportGenerator.WorkerSupportsCancellation = True
+        Me.BGReportGenerator.WorkerReportsProgress = true
+        Me.BGReportGenerator.WorkerSupportsCancellation = true
         '
         'StartButton
         '
@@ -1152,7 +984,7 @@ Imports Microsoft.VisualBasic
         Me.StartButton.Size = New System.Drawing.Size(75, 23)
         Me.StartButton.TabIndex = 30
         Me.StartButton.Text = "Start"
-        Me.StartButton.UseVisualStyleBackColor = True
+        Me.StartButton.UseVisualStyleBackColor = true
         '
         'StopButton
         '
@@ -1161,7 +993,7 @@ Imports Microsoft.VisualBasic
         Me.StopButton.Size = New System.Drawing.Size(75, 23)
         Me.StopButton.TabIndex = 31
         Me.StopButton.Text = "Stop"
-        Me.StopButton.UseVisualStyleBackColor = True
+        Me.StopButton.UseVisualStyleBackColor = true
         '
         'RefreshButton
         '
@@ -1170,7 +1002,7 @@ Imports Microsoft.VisualBasic
         Me.RefreshButton.Size = New System.Drawing.Size(75, 23)
         Me.RefreshButton.TabIndex = 32
         Me.RefreshButton.Text = "Refresh"
-        Me.RefreshButton.UseVisualStyleBackColor = True
+        Me.RefreshButton.UseVisualStyleBackColor = true
         '
         'RunButton
         '
@@ -1179,7 +1011,7 @@ Imports Microsoft.VisualBasic
         Me.RunButton.Size = New System.Drawing.Size(75, 23)
         Me.RunButton.TabIndex = 33
         Me.RunButton.Text = "Run Now"
-        Me.RunButton.UseVisualStyleBackColor = True
+        Me.RunButton.UseVisualStyleBackColor = true
         '
         'SettingsButton
         '
@@ -1188,7 +1020,7 @@ Imports Microsoft.VisualBasic
         Me.SettingsButton.Size = New System.Drawing.Size(75, 23)
         Me.SettingsButton.TabIndex = 34
         Me.SettingsButton.Text = "Settings"
-        Me.SettingsButton.UseVisualStyleBackColor = True
+        Me.SettingsButton.UseVisualStyleBackColor = true
         '
         'OpenCloseAccess
         '
@@ -1197,23 +1029,23 @@ Imports Microsoft.VisualBasic
         Me.OpenCloseAccess.Size = New System.Drawing.Size(75, 23)
         Me.OpenCloseAccess.TabIndex = 35
         Me.OpenCloseAccess.Text = "Button2.1"
-        Me.OpenCloseAccess.UseVisualStyleBackColor = True
+        Me.OpenCloseAccess.UseVisualStyleBackColor = true
         '
         'BGReportDistributor
         '
-        Me.BGReportDistributor.WorkerSupportsCancellation = True
+        Me.BGReportDistributor.WorkerSupportsCancellation = true
         '
         'Distributing
         '
-        Me.Distributing.AutoSize = True
-        Me.Distributing.Checked = True
+        Me.Distributing.AutoSize = true
+        Me.Distributing.Checked = true
         Me.Distributing.CheckState = System.Windows.Forms.CheckState.Checked
         Me.Distributing.Location = New System.Drawing.Point(1091, 232)
         Me.Distributing.Name = "Distributing"
         Me.Distributing.Size = New System.Drawing.Size(78, 17)
         Me.Distributing.TabIndex = 36
         Me.Distributing.Text = "Distributing"
-        Me.Distributing.UseVisualStyleBackColor = True
+        Me.Distributing.UseVisualStyleBackColor = true
         '
         'NextDistribute
         '
@@ -1237,11 +1069,11 @@ Imports Microsoft.VisualBasic
         Me.DistributeButton.Size = New System.Drawing.Size(75, 23)
         Me.DistributeButton.TabIndex = 39
         Me.DistributeButton.Text = "Distribute Now"
-        Me.DistributeButton.UseVisualStyleBackColor = True
+        Me.DistributeButton.UseVisualStyleBackColor = true
         '
         'BGMessenger
         '
-        Me.BGMessenger.WorkerSupportsCancellation = True
+        Me.BGMessenger.WorkerSupportsCancellation = true
         '
         'NextMessageRun
         '
@@ -1252,13 +1084,13 @@ Imports Microsoft.VisualBasic
         '
         'SendingMessages
         '
-        Me.SendingMessages.AutoSize = True
+        Me.SendingMessages.AutoSize = true
         Me.SendingMessages.Location = New System.Drawing.Point(1091, 258)
         Me.SendingMessages.Name = "SendingMessages"
         Me.SendingMessages.Size = New System.Drawing.Size(116, 17)
         Me.SendingMessages.TabIndex = 40
         Me.SendingMessages.Text = "Sending Messages"
-        Me.SendingMessages.UseVisualStyleBackColor = True
+        Me.SendingMessages.UseVisualStyleBackColor = true
         '
         'LastMessageRun
         '
@@ -1274,12 +1106,22 @@ Imports Microsoft.VisualBasic
         Me.Messenger.Size = New System.Drawing.Size(75, 23)
         Me.Messenger.TabIndex = 43
         Me.Messenger.Text = "Messenger"
-        Me.Messenger.UseVisualStyleBackColor = True
+        Me.Messenger.UseVisualStyleBackColor = true
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(933, 18)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 44
+        Me.Button1.Text = "Sendgrid Test Email"
+        Me.Button1.UseVisualStyleBackColor = true
         '
         'Schedule
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
         Me.ClientSize = New System.Drawing.Size(1454, 558)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Messenger)
         Me.Controls.Add(Me.LastMessageRun)
         Me.Controls.Add(Me.NextMessageRun)
@@ -1308,36 +1150,38 @@ Imports Microsoft.VisualBasic
         Me.Controls.Add(Me.TreeView1)
         Me.Name = "Schedule"
         Me.Text = "Schedule"
-        Me.TopMost = CType(configurationAppSettings.GetValue("Schedule.TopMost", GetType(Boolean)), Boolean)
-        CType(Me.Timer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabControl1.ResumeLayout(False)
-        Me.JobSchedule.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.JobListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ActivityLog.ResumeLayout(False)
-        CType(Me.dgActivityLog, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Users.ResumeLayout(False)
-        CType(Me.dgUserSubscriptions, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgUserList2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Reports.ResumeLayout(False)
-        CType(Me.DataGrid1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ASN.ResumeLayout(False)
-        CType(Me.dgASNList, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.OverdueList.ResumeLayout(False)
-        CType(Me.dgvOverdueJobs, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Distribute.ResumeLayout(False)
-        CType(Me.dgvDistributionList, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage1.ResumeLayout(False)
-        CType(Me.dgvMessageList, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MessageListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
-        CType(Me.dgvAccessAlerts, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.AlertListBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MessageListBindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.TopMost = CType(configurationAppSettings.GetValue("Schedule.TopMost", GetType(Boolean)),Boolean)
+        CType(Me.Timer1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabControl1.ResumeLayout(false)
+        Me.JobSchedule.ResumeLayout(false)
+        CType(Me.DataGridView1,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.JobListBindingSource,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ActivityLog.ResumeLayout(false)
+        CType(Me.dgActivityLog,System.ComponentModel.ISupportInitialize).EndInit
+        Me.Users.ResumeLayout(false)
+        CType(Me.dgUserSubscriptions,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dgUserList2,System.ComponentModel.ISupportInitialize).EndInit
+        Me.Reports.ResumeLayout(false)
+        CType(Me.DataGrid1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ASN.ResumeLayout(false)
+        CType(Me.dgASNList,System.ComponentModel.ISupportInitialize).EndInit
+        Me.OverdueList.ResumeLayout(false)
+        CType(Me.dgvOverdueJobs,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.JOBBindingSource,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.DataSetLocal,System.ComponentModel.ISupportInitialize).EndInit
+        Me.Distribute.ResumeLayout(false)
+        CType(Me.dgvDistributionList,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage1.ResumeLayout(false)
+        CType(Me.dgvMessageList,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MessageListBindingSource,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage2.ResumeLayout(false)
+        CType(Me.dgvAccessAlerts,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.AlertListBindingSource,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MessageListBindingSource1,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
 #End Region
     Dim StartTime As Date = CDate(My.Settings.StartTime)
@@ -1348,6 +1192,37 @@ Imports Microsoft.VisualBasic
     Dim EndTime As Date = CDate(My.Settings.EndTime)
     Dim MaxCount As Long = 15
     Dim SinceDate As Date = DateAdd("d", -2, DateTime.Now)
+    
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+ '       Dim client = New SendGridClient("Jm44j-Q2RQqzxnsBgXFbDg")
+ '       Dim from = New EmailAddress("autoreports@htsmi.com")
+ '       Dim subject = "Test Email from SendGrid using api"
+ '       Dim sto = New EmailAddress("edolikian@ssitroy.com",)
+        Dim transportWeb As SendGrid.Web
+     '   transportWeb = New SendGrid.Web("Jm44j-Q2RQqzxnsBgXFbDg")
+        Dim myMessage As SendGridMessage
+        myMessage = New SendGridMessage()
+        myMessage.From = New MailAddress("autoreports@htsmi.com")
+        myMessage.AddTo("edolikian@ssitroy.com")
+        myMessage.AddTo("autoreports@ssitroy.com")
+        myMessage.Subject = "Testing SendGrid"
+        myMessage.Text = "Hello World plain text"
+        myMessage.Html = "<p>Hellow World!<p>"
+
+        Dim credentials As NetworkCredential
+        credentials = New NetworkCredential("apikey", "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")
+      '  credentials = New NetworkCredential("edolikian","HtsmiX302")
+        transportWeb = New Web(credentials)
+        transportWeb.Deliver(myMessage)
+
+
+
+    '    Dim testmsg As SendGrid.SendGridMessage() = New SendGrid.SendGridMessage()
+    '    testmsg
+    End Sub
+
+
 
     Delegate Sub SetUIText_Delegate(ByVal [ControlName] As System.Windows.Forms.TextBox, ByVal [text] As String)
     Private Sub SetUIText_ThreadSafe(ByVal [ControlName] As Windows.Forms.TextBox, ByVal [text] As String)
@@ -1492,7 +1367,7 @@ Imports Microsoft.VisualBasic
                 '    artest = ar.GetAutoReportsData
                 '    MsgBox(artest.Tables.Count.ToString)
                 dgvOverdueJobs.DataSource = ws.GetOverdueJobsList(3, DateTime.Now.ToString())
-                dgvDistributionList.DataSource = ws.GetJobsToDistribute(50, DateTime.Now.AddDays(-2))
+                dgvDistributionList.DataSource = ws.GetJobsToDistribute(40, DateTime.Now.AddDays(-2))
                 dgvMessageList.DataSource = ws.GetOverdueMessages(10, DateTime.Now.AddDays(-1))
                 dgvAccessAlerts.DataSource = ws.GetOverdueAlerts(20, DateTime.Now.AddDays(-7))
 
@@ -1667,20 +1542,40 @@ Imports Microsoft.VisualBasic
     Public Function UploadReportToAzure(ByVal LocalDirectory As String, ByVal LocalFileName As String, ByVal AzureContainerName As String, ByVal AzureFileName As String) As Boolean
         Try
             ' Setup Variables for Cloud Storage Objects
-            Dim cloudStoargeAccount As CloudStorageAccount
+            Dim cloudStorageAccount As CloudStorageAccount
             Dim blobClient As CloudBlobClient
             Dim blobContainer As CloudBlobContainer
             Dim containerPermissions As BlobContainerPermissions
             Dim blob As CloudBlob
+            Dim blob2 As CloudBlockBlob
+
+
+       '     Dim cs As String
+       '     cs = "DefaultEndpointsProtocol=https;AccountName=htsazure;AccountKey=pbhjjJe9/tHpkcNq21UBlRWi+MYTr00HtUUVkqOe4Z+mqFzfF57IcF8PaD/FaWkE6Y0cOnntjd0mmJmwDDwyKg=="
+       '     cs = "DefaultEndpointsProtocol=http;AccountName=sensible;AccountKey=jTiCHXRtXPdEAsnbEhUXAAdNWTwVrR6KeZvyfT6qYusAfyqDKZn8R2Pqy3Os3yYbSj8Zj7zaW5KMohyTr3dMkg=="
+       '     cloudStorageAccount = cloudStorageAccount.Parse(cs)
+       '     blobClient = cloudStorageAccount.CreateCloudBlobClient()
+       '     blobContainer = blobClient.GetContainerReference("0010")
+       '     blob2 = blobContainer.GetBlockBlobReference("testfile")
+       '     Using fileStream = System.IO.File.OpenRead("C:\uploadfolder\output.csv")
+       '         blob2.UploadFromStream(fileStream)
+       '     End Using
+
 
             ' Use the emulated storage account or use the real account
             ' cloudStoargeAccount = CloudStorageAccount.DevelopmentStorageAccount
 
             ' Use the Windows Azure cloud storage account
-            cloudStoargeAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=sensible;AccountKey=jTiCHXRtXPdEAsnbEhUXAAdNWTwVrR6KeZvyfT6qYusAfyqDKZn8R2Pqy3Os3yYbSj8Zj7zaW5KMohyTr3dMkg==")
+         '   cloudStoargeAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=sensible;AccountKey=jTiCHXRtXPdEAsnbEhUXAAdNWTwVrR6KeZvyfT6qYusAfyqDKZn8R2Pqy3Os3yYbSj8Zj7zaW5KMohyTr3dMkg==")
+         '   cloudStorageAccount = cloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=htsazure;AccountKey=pbhjjJe9/tHpkcNq21UBlRWi+MYTr00HtUUVkqOe4Z+mqFzfF57IcF8PaD/FaWkE6Y0cOnntjd0mmJmwDDwyKg==")
+             cloudStorageAccount = cloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=htsazure;AccountKey=SYowHJqWJtHVau1amgFddZWyCKutTBWTRUpv5al+nlvr4sDDLBMdJXIbcFhlRJ4HS/YAtmWh5eoNTP8OBOWR2Q==")
+            '  clodStorageAccount = Storage.CloudStorageAccount.Parse(Configuration
+
+            ' cloudStoargeAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=http;AccountName=htsazure;AccountKey=aY4Qq3xbXKXDoh7YfZmeYIdBQ9qKGu5mrAZ/PvGygeBnbDLl0+zcx1J8G3HdWALWyTqVuf7er35+P7V9F0xy8Q==;EndpointSuffix=core.windows.net")
+
 
             ' Create the blob client which priveds autheneticated access to the Blob service    
-            blobClient = cloudStoargeAccount.CreateCloudBlobClient()
+            blobClient = cloudStorageAccount.CreateCloudBlobClient()
 
             ' Get the container reference
             blobContainer = blobClient.GetContainerReference(AzureContainerName)
@@ -1747,6 +1642,7 @@ Imports Microsoft.VisualBasic
             email.Subject = Subject
             email.Body = BodyText
             email.IsBodyHtml = True
+            
 
             '  Need to split ccDistList by ";"
             Dim ccList As String() = ccDistList.Split(";")
@@ -1754,8 +1650,15 @@ Imports Microsoft.VisualBasic
                 email.CC.Add(item)
             Next
             '  email.CC.Add(ccDistList)
+          '  SMTPServerName = "smtp.office365.com"
+          '  SMTPUser = "autoreports@htsmi.com"
+          '  SMTPPassword = "Getmeintoit5%"
+
+
+
             Dim mailClient As New Mail.SmtpClient(SMTPServerName)
             mailClient.Credentials = New System.Net.NetworkCredential(SMTPUser, SMTPPassword)
+            mailClient.Port = 587
             mailClient.Send(email)
             Return True
             SetUIText_ThreadSafe(Me.StatusBar, "Email Sent")
@@ -1771,7 +1674,58 @@ Imports Microsoft.VisualBasic
         End Try
 
     End Function
+    
+    Public Function SendEmailToGroup(ByVal distlist As string, ByVal from As String, ByVal Subject As String, ByVal BodyText As String, ByVal AttachFile As String) As Boolean
 
+        Dim sattach As String = AttachFile
+        Dim FromUserName As String = My.Settings.FromUserName
+        Dim SMTPServerName As String = My.Settings.SMTPServerName
+        Dim ccDistList As String = My.Settings.ccDistList
+        Dim SMTPUser As String = My.Settings.SMTPUser
+        Dim SMTPPassword As String = My.Settings.SMTPPassword
+        Dim email As New MailMessage()
+        Try
+            If Len(sattach) > 0 Then
+                Dim myAttachment As Mail.Attachment = New Mail.Attachment(sattach)
+                email.Attachments.Add(myAttachment)
+            End If
+            Thread.Sleep(100)
+            Dim SendTo() As String
+            Dim N As Integer
+            SendTo = distlist.Split(";")
+            For Each Item As String In SendTo
+                email.To.Add(item)
+            Next
+            email.From = New MailAddress(FromUserName, "HTS Online Reports")
+            email.Subject = Subject
+            email.Body = BodyText
+            email.IsBodyHtml = True
+
+            '  Need to split ccDistList by ";"
+            Dim ccList As String() = ccDistList.Split(";")
+            For Each item As String In ccList
+                email.CC.Add(item)
+            Next
+          
+            Dim mailClient As New Mail.SmtpClient(SMTPServerName)
+            mailClient.Credentials = New System.Net.NetworkCredential(SMTPUser, SMTPPassword)
+            mailClient.Port = 587
+            mailClient.Send(email)
+            Return True
+            SetUIText_ThreadSafe(Me.StatusBar, "Email Sent")
+            Return True
+        Catch ex As Exception
+            Debug.WriteLine(ex.Message.ToString)
+            SetUIText_ThreadSafe(Me.StatusBar, ex.Message.ToString)
+            Return False
+            ' This converted to True to mark as sent during sbsserver changeover on 2/11/11 / need to change back once server is back up
+            '            Return False
+        Finally
+            Thread.Sleep(100)
+        End Try
+
+    End Function
+    
 
     Private Function DistributeAutoReports(ByVal MaxCount As Long, ByVal SinceDate As DateTime) As Long
 
@@ -1804,7 +1758,8 @@ Imports Microsoft.VisualBasic
             Dim subject As String = row.SUBJECT + " @ " + row.CREATED.ToShortDateString + " " + row.CREATED.ToShortTimeString
             Dim strfrom As String
             Dim Note As String = "DO NOT REPLY TO SENDER (To Reply, Click on a Recipient's email or All Recipients below)"
-            Dim documenturi As String = "http://sensible.blob.core.windows.net/" + row.CONTAINER + "/" + row.FILENAME
+            '    Dim documenturi As String = "http://sensible.blob.core.windows.net/" + row.CONTAINER + "/" + row.FILENAME
+            Dim documenturi As String = "http://htszaure.blob.core.windows.net/" + row.CONTAINER + "/" + row.FILENAME
             Dim websiteuri As String = "http://75.151.4.117/OnlineReports"
             Dim localfile As String = "C:\HTS\REPORTS\" + "AR" + Format(row.JOBREF, "000000")
             Dim attachfile As String = "C:\HTS\REPORTS\" + "AR" + Format(row.JOBREF, "000000") + "." + row.JOBFORMAT
@@ -1830,7 +1785,8 @@ Imports Microsoft.VisualBasic
                 localfile = localfile + ".XLS"
             End If
 
-            strfrom = "autoreports@ssitroy.com"
+            '  strfrom = "autoreports@ssitroy.com"
+            strfrom = "autoreports@htsmi.com"
 
             specialmessage = "<p>IMPORTANT NOTE</p>"
             If Note.Length > 0 Then
@@ -2683,7 +2639,8 @@ ErrorHandler:
             If mdwpath <> "" Then
                 sCommand = sProgPath + " " + sdbpath + " /wrkgrp " + mdwpath + " /user " + suser + " /pwd " + spwd
             Else
-                sCommand = sProgPath + " " + sdbpath + " /user AUTOREPORTS"
+             '   sCommand = sProgPath + " " + sdbpath + " /user AUTOREPORTS"
+                sCommand = sProgPath + " " + sdbpath
             End If
             Dim dummy As Long
             dummy = Shell(sCommand, AppWinStyle.MinimizedFocus, Wait:=True, Timeout:=5000)
@@ -2762,8 +2719,20 @@ ErrorHandler:
                     '   SetUIText_ThreadSafe(Me.StatusBar, "Opening Query for Export")
 
                 Else
+                     If System.IO.File.Exists(localfilepath) Then
+                        System.IO.File.Delete(localfilepath)
+                        System.Threading.Thread.Sleep(1000)
+                        SetUIText_ThreadSafe(Me.StatusBar, "Report Existed - Deleted")
+                     End If
+
+
+
                     oAccess.DoCmd.SelectObject(ObjectType:=Access.AcObjectType.acReport, ObjectName:=sreport, InDatabaseWindow:=True)
                     oAccess.DoCmd.OpenReport(ReportName:=sreport, View:=Access.AcView.acViewPreview, WhereCondition:=scriteria)
+
+
+                   ' Dim AcFileFormatPDF As Object = Nothing
+                   ' oAccess.DoCmd.OutputTo(AcOutputObjectType.acOutputReport, sreport, AcFileFormatPDF, localfilepath,False,,,AcExportQuality.acExportQualityPrint)
                     ' 2501 ERR IS NO DATA
                     oAccess.DoCmd.Maximize()
                     oAccess.Reports(sreport).FilterOn = True
@@ -2780,6 +2749,14 @@ ErrorHandler:
 
             Select Case outputformat
                 Case Is = "PDF"
+                    If System.IO.File.Exists(localfilepath) then
+                        System.IO.File.Delete(localfilepath)
+                        System.Threading.Thread.Sleep(1000)
+                           SetUIText_ThreadSafe(Me.StatusBar, "Report Existed - Deleted")
+                    End If    
+                    Const acFormatPDF As String = "PDF Format(*.pdf)"
+                    oAccess.DoCmd.OutputTo(Access.AcOutputObjectType.acOutputReport,sreport,acFormatPDF,localfilepath,,,,AcExportQuality.acExportQualityPrint)
+                Case Is = "PDFAmyuni"
                     ' Save as a PDF
                     Try
                         '                        oAccess.DoCmd.OutputTo(Access.AcOutputObjectType.acOutputReport, sreport, System.Windows.Forms.DataFormats.Rtf, localfilepath, False)
@@ -3460,13 +3437,13 @@ WaitforAccess:
                         sAccPath = "C:\Program Files (x86)\Microsoft Office\root\Office16\MSACCESS.EXE"
                         sAccPath = "C:\Program Files (x86)\Microsoft Office\Office16\MSACCESS.EXE"
                         app.STARTUP_DIRECTORY = "c:\HTS\APP2K3\"
-                        app.STARTUP_FILENAME = "HTSDEV2K3.MDB"
+                        app.STARTUP_FILENAME = "HTSAPP2K3.MDB"
                         app.MDW_DIRECTORY = ""
                         app.MDW_FILENAME = ""
                         '   app.USERNAME = "AUTOREPORTS"
                         '   app.PASSWORD = "4438"
-                        app.USERNAME = "AUTOREPORTS"
-                        app.PASSWORD = ""
+                     '   app.USERNAME = "AUTOREPORTS"
+                     '   app.PASSWORD = ""
                     End If
 
                     Try
@@ -3669,7 +3646,8 @@ NextApp:
         Dim NumberToSend As Long = 0
 
         '  Retrieve List of Jobs to Distribute
-        Dim SinceDateString = SinceDate.AddDays(-2).ToString()
+       ' Dim SinceDateString = SinceDate.AddDays(-2).ToString()
+        Dim SinceDateString = SinceDate.AddDays(-1).ToString()
         al = ws.GetJobsToDistribute(MaxCount, SinceDateString)
         NumberToSend = al.Length()
         '  Process Each Archive
@@ -3699,8 +3677,8 @@ NextApp:
             Dim strfrom As String
             Dim Note As String = "PLEASE DO NOT REPLY TO SENDER"
 
-            Dim documenturi As String = "http://sensible.blob.core.windows.net/" + row.CONTAINER + "/" + row.FILENAME
-            Dim websiteuri As String = "http://75.151.4.117/OnlineReports"
+            Dim documenturi As String = "https://htsazure.blob.core.windows.net/" + row.CONTAINER + "/" + row.FILENAME
+         '   Dim websiteuri As String = "http://75.151.4.117/OnlineReports"
             Dim localfile As String = "T:\HTS\REPORTS\" + "AR" + Format(row.JOBREF, "000000")
             Dim attachfile As String = "T:\HTS\REPORTS\" + "AR" + Format(row.JOBREF, "000000") + "." + row.JOBFORMAT
 
@@ -3738,7 +3716,7 @@ NextApp:
             specialmessage = specialmessage & "<p><a href=" & documenturi & ">Click Here to View Report</a></p>" & Chr(10) & Chr(13)
 
             specialmessage = specialmessage & "<p>You are receiving this automated email from Heat Treating Services.</p>" & Chr(10) & Chr(13)
-            specialmessage = specialmessage & "<p>To ensure proper delivery, please be sure to add autoreports@ssitroy.com to your trusted senders list.</p>" & Chr(10) & Chr(13)
+            specialmessage = specialmessage & "<p>To ensure proper delivery, please be sure to add autoreports@htsmi.com to your trusted senders list.</p>" & Chr(10) & Chr(13)
             specialmessage = specialmessage & "<p>For any production or scheduling questions, please contact your plant representative or call (248) 858-2230.</p>" & Chr(10) & Chr(13)
             specialmessage = specialmessage & "<p>Thank you</p>"
 
@@ -3768,7 +3746,7 @@ NextApp:
 
             '     specialmessage = specialmessage & "<p>Current Distribution List => " & distlist & "</p>" & Chr(10) & Chr(13)
 
-            specialmessage = specialmessage & "<p>To Add or Change Distribution, Click Here to send a message to <a href=mailto:edolikian@ssitroy.com;fshepard@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + " System Administrators</a></p>" & Chr(10) & Chr(13) & Chr(10) & Chr(13)
+            specialmessage = specialmessage & "<p>To Add or Change Distribution, Click Here to send a message to <a href=mailto:edolikian@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + " System Administrators</a></p>" & Chr(10) & Chr(13) & Chr(10) & Chr(13)
 
             specialmessage = specialmessage & "<p>Message Sent from HTSAUTO at " & DateTime.Now.ToString & " / Ref: " & row.ARCHIVEID & "</p>" & Chr(10) & Chr(13)
             ' Send Email
@@ -3828,9 +3806,7 @@ NextApp:
         Dim SinceDateString As String = DateTime.Now.AddDays(-2).ToString()
 
         Try
-
-
-
+            
             ml = ws.GetOverdueMessages(MaxCount, SinceDateString)
             NumberToSend = ml.Length()
             '  Process Each Archive
@@ -3845,8 +3821,15 @@ NextApp:
                 NumberSent += 1
 
                 ' Determine Distribution List
+                
                 distlist = row.DISTLIST
 
+                  '  Need to split ccDistList by ";"
+                Dim dlLIST As STRING() 
+                dlLIST = distlist.Split(";")
+               
+             '  Need to split ccDistList by ";"
+          
                 SetUIText_ThreadSafe(Me.StatusBar, "Sending Messages..." + NumberSent.ToString + " of " + NumberToSend.ToString + " " + row.ID.ToString + " " + row.SUBJECT & " to " + distlist)
 
                 ' Prepare Message to Send to Distribution List
@@ -3858,9 +3841,12 @@ NextApp:
 
                 specialmessage = "<p>IMPORTANT NOTE</p>"
                 If Note.Length > 0 Then
-                    specialmessage = specialmessage & Note & Chr(10) & Chr(13)
+                    specialmessage = specialmessage & Note & "<br>"
                 End If
-                specialmessage = specialmessage + row.BODY
+                Dim BODY As STRING
+                BODY = Replace(row.BODY,vbCrLf,"<BR>")
+             
+                specialmessage = specialmessage + BODY
                 specialmessage = specialmessage & "<p>You are receiving this message via email from Heat Treating Services.  If you would like to be removed from distribution or would like someone else to be added, please contact Franklin Shepard or simply reply to this email.</p>" & Chr(10) & Chr(13)
                 specialmessage = specialmessage & "<p>To ensure proper delivery, please be sure to add autoreports@ssitroy.com to your trusted senders list.</p>" & Chr(10) & Chr(13)
                 specialmessage = specialmessage & "<p>For any production or scheduling questions, please contact your plant representative or call (248) 858-2230.</p>" & Chr(10) & Chr(13)
@@ -3878,7 +3864,11 @@ NextApp:
                 ' specialmessage = specialmessage + "<p>Click here to Login to <a href=" + websiteuri + "> HTS Online</a></p>" + Chr(10) & Chr(13)
                 Dim emailresult As Boolean
                 Dim sentresult As Boolean
-                emailresult = ws.SendMessage(row.DISTLIST, subject, row.BODY)
+
+                
+            '    emailresult = SendEmailToGroup(row.DISTLIST, "autoreports@htsmi.com", subject, row.BODY,"")
+                emailresult = SendEmailToGroup(row.DISTLIST,"autoreports@htsmi.com", subject, specialmessage,"")
+           '     emailresult = ws.SendMessage(row.DISTLIST, subject, row.BODY)
                 If emailresult = True Then
                     sentresult = ws.MarkQAMessageAsSent(row.ID)
                     SetUIText_ThreadSafe(Me.StatusBar, "Message Sent")
@@ -3922,4 +3912,10 @@ NextApp:
     Private Sub SendingMessages_CheckedChanged(sender As Object, e As EventArgs) Handles SendingMessages.CheckedChanged
 
     End Sub
+
+    Private Sub MessageListBindingSource_CurrentChanged(sender As Object, e As EventArgs) Handles MessageListBindingSource.CurrentChanged
+
+    End Sub
+
+
 End Class

@@ -1204,7 +1204,6 @@ End Sub
         Dim myMessage As SendGridMessage
         myMessage = New SendGridMessage()
         myMessage.From = New MailAddress("autoreports@htsmi.com")
-        myMessage.AddTo("edolikian@ssitroy.com")
         myMessage.AddTo("autoreports@ssitroy.com")
         myMessage.Subject = "Testing SendGrid"
         myMessage.Text = "Hello World plain text"
@@ -1636,7 +1635,7 @@ End Sub
                     email.To.Add(New MailAddress(person.EMAIL, person.FULLNAME))
                 Next
             Else
-                email.To.Add(New MailAddress("edolikian@ssitroy.com", "Ed Dolikian"))
+                email.To.Add(New MailAddress("autoreports@ssitroy.com", "Ed Dolikian"))
             End If
             email.From = New MailAddress(FromUserName, "HTS Online Reports")
             email.Subject = Subject
@@ -1823,7 +1822,7 @@ End Sub
 
             '     specialmessage = specialmessage & "<p>Current Distribution List => " & distlist & "</p>" & Chr(10) & Chr(13)
 
-            specialmessage = specialmessage & "<p>Click here to send a message to <a href=mailto:edolikian@ssitroy.com;fshepard@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + "System Administrators</a></p>" & Chr(10) & Chr(13)
+            specialmessage = specialmessage & "<p>Click here to send a message to <a href=mailto:autoreports@ssitroy.com;fshepard@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + "System Administrators</a></p>" & Chr(10) & Chr(13)
 
             specialmessage = specialmessage & "<p>Message Sent from HTSAUTO at " & DateTime.Now.ToString & " / Ref: " & row.ARCHIVEID & "</p>" & Chr(10) & Chr(13)
             ' Send Email
@@ -3746,7 +3745,7 @@ NextApp:
 
             '     specialmessage = specialmessage & "<p>Current Distribution List => " & distlist & "</p>" & Chr(10) & Chr(13)
 
-            specialmessage = specialmessage & "<p>To Add or Change Distribution, Click Here to send a message to <a href=mailto:edolikian@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + " System Administrators</a></p>" & Chr(10) & Chr(13) & Chr(10) & Chr(13)
+            specialmessage = specialmessage & "<p>To Add or Change Distribution, Click Here to send a message to <a href=mailto:autoreports@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + " System Administrators</a></p>" & Chr(10) & Chr(13) & Chr(10) & Chr(13)
 
             specialmessage = specialmessage & "<p>Message Sent from HTSAUTO at " & DateTime.Now.ToString & " / Ref: " & row.ARCHIVEID & "</p>" & Chr(10) & Chr(13)
             ' Send Email
@@ -3855,8 +3854,7 @@ NextApp:
 
                 specialmessage = specialmessage & "<p>Click here to send a message to <a href=mailto:" & distlist & "?subject=Reply%20Message%20to%20AutoReport>" & "All Recipients</a></p>" & Chr(10) & Chr(13)
 
-
-                specialmessage = specialmessage & "<p>Click here to send a message to <a href=mailto:edolikian@ssitroy.com;fshepard@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + "System Administrators</a></p>" & Chr(10) & Chr(13)
+                specialmessage = specialmessage & "<p>Click here to send a message to <a href=mailto:autoreports@ssitroy.com;fshepard@htsmi.com" + "?subject=Message%20to%20Admins%20Message%20to%20AutoReport>" + "System Administrators</a></p>" & Chr(10) & Chr(13)
 
                 specialmessage = specialmessage & "<p>Message Sent from HTSAUTO at " & DateTime.Now.ToString & " / Ref: " & row.ID & "</p>" & Chr(10) & Chr(13)
 

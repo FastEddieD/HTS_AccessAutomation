@@ -54,7 +54,7 @@
       <Value Profile="(Default)">smtp.sendgrid.net</Value>
     </Setting>
     <Setting Name="ccDistList" Type="System.String" Scope="User">
-      <Value Profile="(Default)">edolikian@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com</Value>
+      <Value Profile="(Default)">autoreports@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com</Value>
     </Setting>
     <Setting Name="SMTPUser" Type="System.String" Scope="User">
       <Value Profile="(Default)">edolikian</Value>

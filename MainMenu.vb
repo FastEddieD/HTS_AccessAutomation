@@ -306,6 +306,7 @@ Public Class MainMenu
     End Sub
 
     Private Sub MenuItem11_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItem11.Click
+        '  This is not used
         Dim test As New Schedule
         test.Show()
     End Sub

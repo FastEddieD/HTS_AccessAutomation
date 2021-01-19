@@ -272,7 +272,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("edolikian")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("apikey")>  _
         Public Property SMTPUser() As String
             Get
                 Return CType(Me("SMTPUser"),String)
@@ -284,7 +284,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("HtsmiX302")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("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")>  _
         Public Property SMTPPassword() As String
             Get
                 Return CType(Me("SMTPPassword"),String)

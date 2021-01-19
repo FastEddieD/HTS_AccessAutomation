@@ -57,10 +57,10 @@
       <Value Profile="(Default)">autoreports@ssitroy.com;fshepard@htsmi.com;jwhaley@htsmi.com</Value>
     </Setting>
     <Setting Name="SMTPUser" Type="System.String" Scope="User">
-      <Value Profile="(Default)">edolikian</Value>
+      <Value Profile="(Default)">apikey</Value>
     </Setting>
     <Setting Name="SMTPPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">HtsmiX302</Value>
+      <Value Profile="(Default)">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</Value>
     </Setting>
   </Settings>
 </SettingsFile>
